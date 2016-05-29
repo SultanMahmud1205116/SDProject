@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sultanmahmud.databasedemoversionone">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.SuccessfulLogInActivity" />
+        <activity android:name=".activities.UnsuccessfulLogInActivity" />
+        <activity android:name=".activities.ShowAllAssetsActivity" />
+        <activity android:name=".activities.DummyActivity" />
+        <activity android:name=".activities.AddAssetActivity" />
+        <activity android:name=".activities.ShowAllBankSavingsActivity" />
+        <activity android:name=".activities.AddBankSavingsActivity" />
+        <activity android:name=".activities.TaxResultShowActivity" />
+        <activity android:name=".activities.ShowAllBankLoans" />
+        <activity android:name=".activities.AddBankLoansActivity" />
+        <activity android:name=".activities.ShowLoansGivenActivity" />
+        <activity android:name=".activities.AddLoansGivenActivity" />
+        <activity android:name=".activities.ShowAllIncomeActivity" />
+        <activity android:name=".activities.AddIncomeActivity" />
+        <activity android:name=".activities.ShowAllExpendituresActivity" />
+        <activity android:name=".activities.AddExpenditureActivity" />
+        <activity android:name=".activities.ShowAllSavingsActivity"></activity>
+    </application>
+
+</manifest>
