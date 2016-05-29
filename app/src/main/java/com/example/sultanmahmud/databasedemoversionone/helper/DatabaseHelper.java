@@ -483,6 +483,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SavingsHelper savingsHelper= new SavingsHelper();
         SQLiteDatabase sqLiteDatabase= this.getReadableDatabase();
         ArrayList<Savings> savingsArrayList= savingsHelper.getSavings(sqLiteDatabase,userID);
+        //Log.d("%%%%%", ""+savingsArrayList.size());
         return  savingsArrayList;
     }
 

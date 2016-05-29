@@ -171,6 +171,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 ArrayList<Savings> savingsArrayList=dbh.getSavingsList(userID);
+                //Log.d("%%%%%", ""+savingsArrayList.size());
                 Intent intent= new Intent(SuccessfulLogInActivity.this, ShowAllSavingsActivity.class);
                 intent.putExtra("SAVINGS_LIST",savingsArrayList);
                 startActivity(intent);

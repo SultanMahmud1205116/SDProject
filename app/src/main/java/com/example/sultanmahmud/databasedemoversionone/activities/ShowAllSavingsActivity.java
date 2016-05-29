@@ -1,7 +1,9 @@
 package com.example.sultanmahmud.databasedemoversionone.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ public class ShowAllSavingsActivity extends AppCompatActivity {
         addSavingsButton= (Button) findViewById(R.id.add_savings_button_savings);
         savingsListView=(ListView)findViewById(R.id.savings_list_view_savings);
         savingsArrayList=(ArrayList<Savings>)getIntent().getSerializableExtra("SAVINGS_LIST");
+        Log.d("%%%%%", ""+savingsArrayList.size());
 
         baseAdapter=new BaseAdapter() {
             LayoutInflater inflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -57,11 +60,12 @@ public class ShowAllSavingsActivity extends AppCompatActivity {
                 //return null;
                 if(convertView==null){
                     convertView=inflater.inflate(R.layout.savings,null);
+                    //convertView=inflater.inflate(R.layout.asset,null);
                 }
 
-                TextView savingsAmount= (TextView) findViewById(R.id.savings_amount_text_view_savings);
-                TextView savingsDescription=(TextView) findViewById(R.id.savings_description_text_view_savings);
-                TextView savingsCategory=(TextView) findViewById(R.id.savings_category_list_view_savings);
+                TextView savingsAmount= (TextView)convertView.findViewById(R.id.savings_amount_text_view_savings);
+                TextView savingsDescription=(TextView) convertView.findViewById(R.id.savings_description_text_view_savings);
+                TextView savingsCategory=(TextView) convertView.findViewById(R.id.savings_category_text_view_savings);
                 savingsAmount.setText(""+savingsArrayList.get(position).getSavingsAmount());
                 savingsDescription.setText(savingsArrayList.get(position).getSavingsDescription());
                 savingsCategory.setText(savingsArrayList.get(position).getSavingsCategory());
@@ -69,5 +73,12 @@ public class ShowAllSavingsActivity extends AppCompatActivity {
             }
         };
         savingsListView.setAdapter(baseAdapter);
+        addSavingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(ShowAllSavingsActivity.this, AddSavingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
