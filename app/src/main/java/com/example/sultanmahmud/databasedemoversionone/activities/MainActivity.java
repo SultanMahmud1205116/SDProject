@@ -17,7 +17,7 @@ import com.example.sultanmahmud.databasedemoversionone.model.User;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginView {
     DatabaseHelper dbh;
     EditText logInAsUserEmailEditText;
     EditText logInAsUserPasswordEditText;
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText logInAsAdminNameEditText;
     EditText logInAsAdminPasswordEditText;
     Button logInAsAdminButton;
+    LoginPresenter presenter;
 
 
     @Override
@@ -61,15 +62,20 @@ public class MainActivity extends AppCompatActivity {
         logInAsAdminNameEditText=(EditText) findViewById(R.id.log_in_as_admin_name_edit_text);
         logInAsAdminPasswordEditText=(EditText)findViewById(R.id.log_in_as_admin_password_edit_text);
         logInAsAdminButton=(Button)findViewById(R.id.log_in_as_admin_button);
+        presenter= new LoginPresenter(this);
+        //presenter= new LoginPresenter(this);
 
 
         logInAsUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.onLoginClicked();
                 String userEmailOfUser=logInAsUserEmailEditText.getText().toString();
                 String userPasswordOfUser=logInAsUserPasswordEditText.getText().toString();
                 int userID=dbh.getUserId(userEmailOfUser,userPasswordOfUser);
                 Intent intent;
+
+
 //                Log.d("userName: ",userEmailOfUser);
 //                Log.d("password: ",userPasswordOfUser);
 
@@ -118,6 +124,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    @Override
+    public String getUsername() {
+        return logInAsUserEmailEditText.getText().toString();
+    }
+
+    @Override
+    public void showUsernameError(String s) {
+
+        logInAsUserEmailEditText.setError(s);
+    }
+
+    @Override
+    public String getPassword() {
+        return logInAsUserPasswordEditText.getText().toString();
+    }
+
+    @Override
+    public void showPasswordError(String s) {
+        logInAsUserPasswordEditText.setError(s);
+
+    }
+
+    @Override
+    public void startSuccessfulActivity() {
+      Intent  intent = new Intent(MainActivity.this, SuccessfulLogInActivity.class);
+        startActivity(intent);
 
     }
 }
