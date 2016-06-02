@@ -109,7 +109,7 @@ public class AddAssetActivity extends AppCompatActivity {
                 ArrayList<Asset> assetArrayList= dbh.getAllAssets(userID);
                 Intent intent=new Intent(AddAssetActivity.this, ShowAllAssetsActivity.class);
                 intent.putExtra("LIST_OF_ASSETS",assetArrayList);
-
+                //hello
                 startActivity(intent);
 
             }
