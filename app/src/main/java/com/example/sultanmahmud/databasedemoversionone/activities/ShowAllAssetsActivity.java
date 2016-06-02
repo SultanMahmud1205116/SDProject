@@ -22,6 +22,7 @@ public class ShowAllAssetsActivity extends AppCompatActivity {
     ListView assetsListView;
     ArrayList<Asset> assetArrayList;
     BaseAdapter baseAdapter;
+    int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class ShowAllAssetsActivity extends AppCompatActivity {
         addAssetButton=(Button)findViewById(R.id.asset_add_button);
         assetsListView=(ListView) findViewById(R.id.asset_list_view);
         assetArrayList=(ArrayList<Asset>)getIntent().getSerializableExtra("LIST_OF_ASSETS");
+        userID=getIntent().getIntExtra("USER_ID",0);
 
         baseAdapter= new BaseAdapter() {
             LayoutInflater inflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -78,6 +80,7 @@ public class ShowAllAssetsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ShowAllAssetsActivity.this,AddAssetActivity.class);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
 
             }

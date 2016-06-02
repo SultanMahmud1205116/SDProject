@@ -151,9 +151,24 @@ public class MainActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void startSuccessfulActivity() {
-      Intent  intent = new Intent(MainActivity.this, SuccessfulLogInActivity.class);
-        startActivity(intent);
-
+    public String getAdminName() {
+         return logInAsAdminNameEditText.getText().toString();
     }
+
+    @Override
+    public String getAdminPassword() {
+        return logInAsAdminPasswordEditText.getText().toString();
+    }
+
+    @Override
+    public void showAdminNameError(String s) {
+        logInAsAdminNameEditText.setError(s);
+    }
+
+    @Override
+    public void showAdminPasswordError(String s) {
+        logInAsAdminPasswordEditText.setError(s);
+    }
+
+
 }

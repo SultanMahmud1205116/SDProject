@@ -12,5 +12,9 @@ public interface LoginView {
 
     void showPasswordError(String s);
 
-    void startSuccessfulActivity();
+   // void startSuccessfulActivity();
+    String getAdminName();
+    String getAdminPassword();
+    void showAdminNameError(String s);
+    void showAdminPasswordError(String s);
 }

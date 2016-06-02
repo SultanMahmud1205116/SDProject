@@ -30,9 +30,18 @@ public class LoginPresenter {
             view.showPasswordError("Error in password");
             return;
         }
-        if(userID!=1){
-            view.startSuccessfulActivity();
+        String adminName=view.getAdminName();
+        if(adminName.isEmpty()){
+            view.showAdminNameError("Error in admin name");
+            return;
         }
+        String adminPassword=view.getAdminPassword();
+        if(adminPassword.isEmpty()){
+            view.showAdminPasswordError("Error in admin password");
+            return;
+        }
+
+        //String
 //        int x;
 //        try {
 //            x = dbh.getUserId(userName, password);

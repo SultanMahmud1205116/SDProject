@@ -50,6 +50,28 @@ public class LoginPresenterTest {
         verify(view).showPasswordError("Error in password");
     }
 
+    @Test
+    public void shouldShowErrorWhenAdminNameIsEmpty() throws Exception{
+        when(view.getUsername()).thenReturn("James");
+        when(view.getPassword()).thenReturn("Bond");
+        when(view.getAdminName()).thenReturn("");
+        presenter.onLoginClicked();
+        verify(view).showAdminNameError("Error in admin name");
+
+    }
+
+    @Test
+    public  void shouldShowErrorWhenAdminPasswordIsEMpty() throws Exception{
+        when(view.getUsername()).thenReturn("James");
+        when(view.getPassword()).thenReturn("Bond");
+        when(view.getAdminName()).thenReturn("Hello");
+        when(view.getAdminPassword()).thenReturn("");
+        presenter.onLoginClicked();
+
+        verify(view).showAdminPasswordError("Error in admin password");
+
+    }
+
 
 
 

@@ -487,5 +487,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return  savingsArrayList;
     }
 
+    public void addAsset(int userID, Asset asset){
+        SQLiteDatabase sqLiteDatabase= this.getReadableDatabase();
+        String assetCategory=asset.getAssetCategory();
+        String selectQuery1="select asset_category_id from asset_category where asset_category_name = '"+assetCategory+"'";
+        Cursor c1=sqLiteDatabase.rawQuery(selectQuery1,null);
+        int assetCategoryID=-1;
+        if(c1.moveToFirst()){
+            do{
+                assetCategoryID=Integer.parseInt(c1.getString(0));
+            }while(c1.moveToNext());
+        }
+        c1.close();
+        Log.d("%%%%%%%%%%%",asset.toString());
+        Log.d("%%%%%%%%%%%",""+assetCategoryID);
+
+        //Asset asset,SQLiteDatabase sqLiteDatabase,int assetCategoryID, int userID
+
+        AssetHelper assetHelper= new AssetHelper();
+        SQLiteDatabase sqLiteDatabase1= this.getWritableDatabase();
+        assetHelper.createNewAsset(asset,sqLiteDatabase1,assetCategoryID,userID);
+        return;
+
+
+
+    }
+
 
 }

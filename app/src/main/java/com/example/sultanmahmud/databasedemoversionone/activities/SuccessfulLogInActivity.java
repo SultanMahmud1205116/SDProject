@@ -94,6 +94,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 Intent intent= new Intent(SuccessfulLogInActivity.this, ShowAllAssetsActivity.class);
                 //int sizeOfArrayList=assetArrayList.size();
                 intent.putExtra("LIST_OF_ASSETS",assetArrayList);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
 
 
