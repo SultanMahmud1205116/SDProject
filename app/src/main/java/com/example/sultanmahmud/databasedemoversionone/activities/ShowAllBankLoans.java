@@ -24,7 +24,7 @@ public class ShowAllBankLoans extends AppCompatActivity {
     ArrayList<Borrow> loanArrayList;
     ListView bankLoanListView;
     BaseAdapter baseAdapter;
-
+    int userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +35,13 @@ public class ShowAllBankLoans extends AppCompatActivity {
         addBankLoanButton=(Button) findViewById(R.id.add_bank_loan_button);
         bankLoanListView=(ListView) findViewById(R.id.bank_loan_list_view);
         loanArrayList= (ArrayList<Borrow>)getIntent().getSerializableExtra("BORROW_LIST");
-        for (Borrow borrow: loanArrayList
-                ) {
-            Log.d("^^^^^^^",borrow.toString());
-
-
-        }
+        userID=getIntent().getIntExtra("USER_ID",0);
+//        for (Borrow borrow: loanArrayList
+//                ) {
+//            Log.d("^^^^^^^",borrow.toString());
+//
+//
+//        }
         baseAdapter=new BaseAdapter() {
             LayoutInflater inflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
             @Override
@@ -91,6 +92,7 @@ public class ShowAllBankLoans extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ShowAllBankLoans.this, AddBankLoansActivity.class);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
 
             }

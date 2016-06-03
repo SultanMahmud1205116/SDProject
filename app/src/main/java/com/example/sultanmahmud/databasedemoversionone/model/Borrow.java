@@ -88,6 +88,19 @@ public class Borrow implements java.io.Serializable {
         this.bankName = bankName;
     }
 
+    public Borrow( float interestRate, double loanAmount, double paidLoan, double remainingLoan,  String paymentDate, String deadlineDate, String bankName, String bankAccount) {
+        //this.borrowID = borrowID;
+        this.interestRate = interestRate;
+        this.loanAmount = loanAmount;
+        this.paidLoan = paidLoan;
+        this.remainingLoan = remainingLoan;
+        //this.loanDuration = loanDuration;
+        this.paymentDate = paymentDate;
+        this.deadlineDate = deadlineDate;
+        this.bankName = bankName;
+        this.bankAccount=bankAccount;
+    }
+
     @Override
     public String toString() {
         return "Borrow [borrowID=" + borrowID + ", bankAccount=" + bankAccount + ", interestRate=" + interestRate

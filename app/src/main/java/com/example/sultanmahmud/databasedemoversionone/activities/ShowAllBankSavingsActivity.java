@@ -21,6 +21,7 @@ public class ShowAllBankSavingsActivity extends AppCompatActivity {
     ListView bankSavingsListView;
     ArrayList<BankSavings> bankSavingsArrayList;
     BaseAdapter baseAdapter;
+    int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class ShowAllBankSavingsActivity extends AppCompatActivity {
         addBankSavingsButton= (Button)findViewById(R.id.add_bank_savings_button);
         bankSavingsListView=(ListView) findViewById(R.id.bank_savings_list_view);
         bankSavingsArrayList=(ArrayList<BankSavings>)getIntent().getSerializableExtra("LIST_OF_BANK_SAVINGS");
-
+        userID=getIntent().getIntExtra("USER_ID",0);
         baseAdapter= new BaseAdapter() {
             LayoutInflater inflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
             @Override
@@ -93,6 +94,7 @@ public class ShowAllBankSavingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ShowAllBankSavingsActivity.this, AddBankSavingsActivity.class);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });

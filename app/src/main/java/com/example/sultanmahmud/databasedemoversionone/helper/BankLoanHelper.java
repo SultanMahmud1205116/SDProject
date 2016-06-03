@@ -1,5 +1,6 @@
 package com.example.sultanmahmud.databasedemoversionone.helper;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
  */
 public class BankLoanHelper {
 
+    //INSERT INTO bank_loan (bank_id, user_id, loan_interest, payment_date, loan_amount, paid_amount, deadline, account_number)  values (
 
     float loanInterest;
     String paymentDate;
@@ -21,6 +23,16 @@ public class BankLoanHelper {
     String deadLine;
     String accountNumber;
     String bankName;
+    private static final String BANK_LOAN_TABLE="bank_loan";
+    private static final String BANK_ID="bank_id";
+    private static final String USER_ID="user_id";
+    private static final String LOAN_INTEREST="loan_interest";
+    private static final String PAYMENT_DATE="payment_date";
+    private static final String LOAN_AMOUNT="loan_amount";
+    private static final String PAID_AMOUNT="paid_amount";
+    private static final String DEADLINE="deadline";
+    private static final String ACCOUNT_NUMBER="account_number";
+
 
     public ArrayList<Borrow> getBorrowArrayList(SQLiteDatabase sqLiteDatabase,int userID){
         ArrayList<Borrow> borrowArrayList=new ArrayList<Borrow>();
@@ -51,6 +63,24 @@ public class BankLoanHelper {
         }
 
         return borrowArrayList;
+
+    }
+    public void addBankLoan(SQLiteDatabase sqLiteDatabase,int userID,int bankID, Borrow borrow, int bankLoanID){
+        ContentValues contentValues = new ContentValues();
+        //INSERT INTO bank_loan (bank_id, user_id, loan_interest, payment_date, loan_amount, paid_amount,
+        // deadline, account_number)  values (
+        //contentValues.put("bank_loan_id",bankLoanID);
+        contentValues.put(BANK_ID, bankID);
+        contentValues.put(USER_ID, userID);
+        contentValues.put(LOAN_INTEREST,borrow.getInterestRate());
+        contentValues.put(PAYMENT_DATE,borrow.getPaymentDate());
+        contentValues.put(LOAN_AMOUNT,borrow.getLoanAmount());
+        contentValues.put(PAID_AMOUNT,borrow.getPaidLoan());
+        contentValues.put(DEADLINE,borrow.getDeadlineDate());
+        contentValues.put(ACCOUNT_NUMBER,borrow.getBankAccount());
+        sqLiteDatabase.insert(BANK_LOAN_TABLE,null,contentValues);
+        sqLiteDatabase.close();
+        return;
 
     }
 }

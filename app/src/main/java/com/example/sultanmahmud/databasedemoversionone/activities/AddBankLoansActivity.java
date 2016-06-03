@@ -1,13 +1,18 @@
 package com.example.sultanmahmud.databasedemoversionone.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.sultanmahmud.databasedemoversionone.R;
+import com.example.sultanmahmud.databasedemoversionone.helper.DatabaseHelper;
+import com.example.sultanmahmud.databasedemoversionone.model.Borrow;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,12 +24,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
 public class AddBankLoansActivity extends AppCompatActivity {
 
-    String[] bank_list = {"Sonali Bank", "Jonota Bank", "Dutch Bangla", "Uttora Bank", "Exim Bank"};
+    String[] bank_list = {"Sonali Bank", "Rupali Bank", "Standard Chartered Bank", "Agrani Bank", "IFIC Bank","Islami Bank"};
     Spinner bank_name;
     String selected_bank, interest_rate, account_number, date, dead_date, paym_date, loan, paid;
     private DatePicker datePicker;
@@ -32,14 +38,15 @@ public class AddBankLoansActivity extends AppCompatActivity {
     int year, month, day, y, m ,d;
     TextView in_rate, pay_date, dead, loan_am, paid_am, accnt;
     Button save;
-    int flag = 0;
+    int userID,flag = 0;
+    DatabaseHelper dbh;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bank_loans);
-
+        dbh=DatabaseHelper.getInstance(getApplicationContext());
         bank_name = (Spinner) findViewById(R.id.bank_name);
         in_rate = (TextView) findViewById(R.id.interest);
         pay_date = (TextView) findViewById(R.id.payment_date);
@@ -47,6 +54,7 @@ public class AddBankLoansActivity extends AppCompatActivity {
         paid_am = (TextView) findViewById(R.id.paid);
         dead = (TextView) findViewById(R.id.deadline);
         accnt = (TextView) findViewById(R.id.accnt_number);
+        userID=getIntent().getIntExtra("USER_ID",0);
 
 
         save = (Button) findViewById(R.id.save);
@@ -81,17 +89,43 @@ public class AddBankLoansActivity extends AppCompatActivity {
                 //bank_name.setPrompt("Select A Bank Name");
             }
         });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //String bankAccount, float interestRate, double loanAmount, double paidLoan, double remainingLoan,
+                //String paymentDate, String deadlineDate, String bankName
+                interest_rate = in_rate.getText().toString();
+                paym_date = pay_date.getText().toString();
+                dead_date = dead.getText().toString();
+
+                loan = loan_am.getText().toString();
+                paid = paid_am.getText().toString();
+                account_number = accnt.getText().toString();
+
+                // float interestRate, double loanAmount, double paidLoan, double remainingLoan,  String paymentDate, String deadlineDate, String bankName
+                Borrow borrow= new Borrow(Float.parseFloat(interest_rate),Double.parseDouble(loan),Double.parseDouble(paid),(Double.parseDouble(loan)-Double.parseDouble(paid)),paym_date,dead_date,selected_bank,account_number);
+                dbh.addBankLoan(userID,borrow);
+                ArrayList<Borrow> borrowArrayList = dbh.getBorrowList(userID);
+                Intent intent= new Intent(AddBankLoansActivity.this, ShowAllBankLoans.class);
+                //getBorrowArrayList
+                intent.putExtra("BORROW_LIST",borrowArrayList);
+                intent.putExtra("USER_ID",userID);
+                startActivity(intent);
+
+            }
+        });
     }
 
     public void saveAction(View view)
     {
-        interest_rate = in_rate.getText().toString();
-        paym_date = pay_date.getText().toString();
-        dead_date = dead.getText().toString();
-
-        loan = loan_am.getText().toString();
-        paid = paid_am.getText().toString();
-        account_number = accnt.getText().toString();
+//        interest_rate = in_rate.getText().toString();
+//        paym_date = pay_date.getText().toString();
+//        dead_date = dead.getText().toString();
+//
+//        loan = loan_am.getText().toString();
+//        paid = paid_am.getText().toString();
+//        account_number = accnt.getText().toString();
     }
 
 
@@ -128,7 +162,7 @@ public class AddBankLoansActivity extends AppCompatActivity {
             y = arg1;
             m = arg2+1;
             d = arg3;
-            date = String.valueOf(d)+"/"+String.valueOf(m)+"/"+String.valueOf(y);
+            date = String.valueOf(d)+"-"+String.valueOf(m)+"-"+String.valueOf(y);
             if(flag == 1) pay_date.setText(date);
             else dead.setText(date);
 

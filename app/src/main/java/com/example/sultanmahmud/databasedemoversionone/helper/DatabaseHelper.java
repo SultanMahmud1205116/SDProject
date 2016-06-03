@@ -23,10 +23,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     // Database Version
-    private static final int DATABASE_VERSION = 5; // last changed version was 5
+    private static final int DATABASE_VERSION = 1; // last changed version was 6
 
     // Database Name
-    public static final String DATABASE_NAME = "newFinanceManager4";
+    public static final String DATABASE_NAME = "newFinanceManager5";
     private static final String TABLE_ASSET = "asset";
     private static final String TABLE_ASSET_CATEGORY = "asset_category";
     private static final String TABLE_USER = "user";
@@ -529,6 +529,70 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         LoanGivenHelper loanGivenHelper= new LoanGivenHelper();
         loanGivenHelper.addLoansGiven(sqLiteDatabase1,userID,(addLoansID+1),loan);
         return;
+
+    }
+
+    public void addBankLoan(int userID, Borrow borrow){
+        SQLiteDatabase sqLiteDatabase= this.getReadableDatabase();
+        String selectQuery="select max(bank_loan_id) from bank_loan";
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery,null);
+        int borrowID=-1;
+        if(cursor.moveToFirst()){
+
+            do{
+                borrowID=Integer.parseInt(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+
+        int bankID=-1;
+        String selectQuery2="select bank_id from bank where bank_name='"+borrow.getBankName()+"'";
+        Cursor cursor1= sqLiteDatabase.rawQuery(selectQuery2,null);
+        if(cursor1.moveToFirst()){
+            do{
+                bankID=Integer.parseInt(cursor1.getString(0));
+            }while(cursor1.moveToNext());
+        }
+        cursor1.close();
+        BankLoanHelper bankLoanHelper= new BankLoanHelper();
+        SQLiteDatabase sqLiteDatabase1= this.getWritableDatabase();
+        bankLoanHelper.addBankLoan(sqLiteDatabase1,userID,bankID,borrow,(borrowID+1));
+
+        return;
+
+
+
+
+    }
+
+    public void addBankSavings(int userID, BankSavings bankSavings){
+
+        SQLiteDatabase sqLiteDatabase= this.getReadableDatabase();
+        //SQLiteDatabase sqLiteDatabase, int userID, BankSavings bankSavings, int bankID, int savingsID
+        int bankID=-1;
+        String selectQuery2="select bank_id from bank where bank_name='"+bankSavings.getBankName()+"'";
+        Cursor cursor1= sqLiteDatabase.rawQuery(selectQuery2,null);
+        if(cursor1.moveToFirst()){
+            do{
+                bankID=Integer.parseInt(cursor1.getString(0));
+            }while(cursor1.moveToNext());
+        }
+        cursor1.close();
+
+        int savingsID=-1;
+        String selectQuery="select max(bank_savings_id) from bank_savings";
+        Cursor cursor=sqLiteDatabase.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                savingsID=Integer.parseInt(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+        SQLiteDatabase sqLiteDatabase1= this.getWritableDatabase();
+        BankSavingsHelper bankSavingsHelper= new BankSavingsHelper();
+        bankSavingsHelper.addBankSavings(sqLiteDatabase1,userID,bankSavings,bankID,(savingsID+1));
+
+        return;
+
 
     }
 

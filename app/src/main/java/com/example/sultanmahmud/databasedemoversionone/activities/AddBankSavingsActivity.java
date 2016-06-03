@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.sultanmahmud.databasedemoversionone.R;
+import com.example.sultanmahmud.databasedemoversionone.helper.DatabaseHelper;
+import com.example.sultanmahmud.databasedemoversionone.model.BankSavings;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddBankSavingsActivity extends AppCompatActivity {
@@ -37,10 +41,11 @@ public class AddBankSavingsActivity extends AppCompatActivity {
     private Calendar calendar;
     // import your list here
     String[] bank_list = {"Sonali Bank", "Jonota Bank", "Dutch Bangla", "Uttora Bank", "Exim Bank"};
-    String selected_bank, interest_rate, savings_ammount, account_number;
-    int year, month, day, y, m ,d;
+    String selected_bank, interest_rate, savings_ammount, account_number,maturity;
+    int year, month, day, y, m ,userID,d;
     Button b;
     TextView in_rate, maturity_date, total_amount, accnt_number;
+    DatabaseHelper dbh;
 
 
 
@@ -49,13 +54,14 @@ public class AddBankSavingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bank_savings);
+        dbh=DatabaseHelper.getInstance(getApplicationContext());
         bank_name = (Spinner) findViewById(R.id.bank_name);
         in_rate = (TextView) findViewById(R.id.interest);
         maturity_date = (TextView) findViewById(R.id.maturity_date);
         total_amount = (TextView) findViewById(R.id.savings);
         accnt_number = (TextView) findViewById(R.id.acc_number);
         b = (Button) findViewById(R.id.save);
-
+        userID=getIntent().getIntExtra("USER_ID",0);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
 
@@ -85,13 +91,40 @@ public class AddBankSavingsActivity extends AppCompatActivity {
             }
         });
 
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                interest_rate = in_rate.getText().toString();
+                savings_ammount = total_amount.getText().toString();
+                account_number = accnt_number.getText().toString();
+                maturity=maturity_date.getText().toString();
+                //String bankName, String bankAccount, double savingsAmount, float interestRate,
+                //String maturity
+
+                BankSavings bankSavings= new BankSavings(selected_bank,account_number,Double.parseDouble(savings_ammount),Float.parseFloat(interest_rate),maturity);
+                dbh.addBankSavings(userID,bankSavings);
+                ArrayList<BankSavings> bankSavingsArrayList;
+                bankSavingsArrayList=dbh.getAllBankSavings(userID);
+                //Log.d("$$$$$$$$$$$",""+bankSavingsArrayList.size());
+
+                Intent intent= new Intent(AddBankSavingsActivity.this,ShowAllBankSavingsActivity.class);
+                intent.putExtra("LIST_OF_BANK_SAVINGS",bankSavingsArrayList);
+                intent.putExtra("USER_ID",userID);
+                startActivity(intent);
+
+
+
+            }
+        });
+
+
     }
 
     public void saveAction(View view)
     {
-        interest_rate = in_rate.getText().toString();
-        savings_ammount = total_amount.getText().toString();
-        account_number = accnt_number.getText().toString();
+//        interest_rate = in_rate.getText().toString();
+//        savings_ammount = total_amount.getText().toString();
+//        account_number = accnt_number.getText().toString();
     }
 
     @SuppressWarnings("deprecation")

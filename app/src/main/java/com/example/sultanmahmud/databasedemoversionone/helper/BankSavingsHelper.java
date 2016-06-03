@@ -1,5 +1,6 @@
 package com.example.sultanmahmud.databasedemoversionone.helper;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -11,6 +12,15 @@ import java.util.ArrayList;
  * Created by sultanmahmud on 5/17/16.
  */
 public class BankSavingsHelper {
+    // bank_savings (bank_id, user_id, interest_rate, maturity_date, total_savings_amount, account_number)
+    private static final String BANK_SAVINGS_TABLE="bank_savings";
+    private static final String BANK_ID="bank_id";
+    private static final String USER_ID="user_id";
+    private static final String INTEREST_RATE="interest_rate";
+    private static final String MATURITY_DATE="maturity_date";
+    private static final String TOTAL_SAVINGS_AMOUNT="total_savings_amount";
+    private static final String ACCOUNT_NUMBER="account_number";
+
 
 
 
@@ -32,6 +42,21 @@ public class BankSavingsHelper {
         }
 
         return bankSavingsArrayList;
+
+    }
+    public void addBankSavings(SQLiteDatabase sqLiteDatabase, int userID, BankSavings bankSavings, int bankID, int savingsID){
+        ContentValues contentValues= new ContentValues();
+        //contentValues.put(BANK_SAVINGS_TABLE, );
+        // bank_savings (bank_id, user_id, interest_rate, maturity_date, total_savings_amount, account_number)
+        contentValues.put(BANK_ID,bankID);
+        contentValues.put(USER_ID,userID);
+        contentValues.put(INTEREST_RATE,bankSavings.getInterestRate());
+        contentValues.put(MATURITY_DATE,bankSavings.getMaturity());
+        contentValues.put(TOTAL_SAVINGS_AMOUNT,bankSavings.getSavingsAmount());
+        contentValues.put(ACCOUNT_NUMBER,bankSavings.getBankAccount());
+        sqLiteDatabase.insert(BANK_SAVINGS_TABLE,null,contentValues);
+        sqLiteDatabase.close();
+        return;
 
     }
 }
