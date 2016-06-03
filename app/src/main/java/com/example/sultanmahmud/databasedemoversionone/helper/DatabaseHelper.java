@@ -512,6 +512,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+    public void addLoansGiven(int userID, Loan loan){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String selectQuery="select max(loan_id) from loan_given";
+        Cursor cursor=sqLiteDatabase.rawQuery(selectQuery,null);
+
+        int addLoansID=-1;
+        if(cursor.moveToFirst()){
+            do{
+                addLoansID=Integer.parseInt(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+
+        SQLiteDatabase sqLiteDatabase1= this.getWritableDatabase();
+        LoanGivenHelper loanGivenHelper= new LoanGivenHelper();
+        loanGivenHelper.addLoansGiven(sqLiteDatabase1,userID,(addLoansID+1),loan);
+        return;
+
+    }
 
 
 }

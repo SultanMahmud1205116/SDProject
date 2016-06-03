@@ -112,6 +112,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
 
                 Intent intent= new Intent(SuccessfulLogInActivity.this,ShowAllBankSavingsActivity.class);
                 intent.putExtra("LIST_OF_BANK_SAVINGS",bankSavingsArrayList);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });
@@ -124,6 +125,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 //taxReports.add(taxReport);
                 Intent intent = new Intent(SuccessfulLogInActivity.this, TaxResultShowActivity.class);
                 intent.putExtra("TAX_REPORT",taxReport);
+                intent.putExtra("USER_ID",userID);
                 //intent.put
                 startActivity(intent);
 
@@ -137,6 +139,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 Intent intent= new Intent(SuccessfulLogInActivity.this, ShowAllBankLoans.class);
 
                 intent.putExtra("BORROW_LIST",borrowArrayList);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
 
             }
@@ -147,6 +150,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 ArrayList<Loan> loanArrayList=dbh.getLoansGivenList(userID);
                 Intent intent= new Intent(SuccessfulLogInActivity.this,ShowLoansGivenActivity.class);
                 intent.putExtra("LOANS_GIVEN_LIST",loanArrayList);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });
@@ -156,6 +160,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 ArrayList<Income> incomeArrayList=dbh.getIncomeList(userID);
                 Intent intent= new Intent(SuccessfulLogInActivity.this, ShowAllIncomeActivity.class);
                 intent.putExtra("INCOME_LIST",incomeArrayList);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });
@@ -165,6 +170,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 ArrayList<Expenditure> expenditureArrayList=dbh.getExpenditureList(userID);
                 Intent intent= new Intent(SuccessfulLogInActivity.this, ShowAllExpendituresActivity.class);
                 intent.putExtra("EXPENDITURE_LIST", expenditureArrayList);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });
@@ -175,6 +181,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 //Log.d("%%%%%", ""+savingsArrayList.size());
                 Intent intent= new Intent(SuccessfulLogInActivity.this, ShowAllSavingsActivity.class);
                 intent.putExtra("SAVINGS_LIST",savingsArrayList);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });

@@ -21,6 +21,7 @@ public class ShowLoansGivenActivity extends AppCompatActivity {
     ListView loansGivenListView;
     BaseAdapter baseAdapter;
     ArrayList<Loan> loanArrayList;
+    int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ShowLoansGivenActivity extends AppCompatActivity {
         addLoansGiven= (Button) findViewById(R.id.add_loan_given_button_loan_given);
         loansGivenListView=(ListView) findViewById(R.id.loans_given_list_view_loan_given);
         loanArrayList=(ArrayList<Loan>)getIntent().getSerializableExtra("LOANS_GIVEN_LIST");
+        userID=getIntent().getIntExtra("USER_ID",0);
         //loanArrayList
 
         baseAdapter= new BaseAdapter() {
@@ -78,7 +80,9 @@ public class ShowLoansGivenActivity extends AppCompatActivity {
         addLoansGiven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent= new Intent(ShowLoansGivenActivity.this, AddLoansGivenActivity.class);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });
