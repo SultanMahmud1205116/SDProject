@@ -22,6 +22,7 @@ public class ShowAllExpendituresActivity extends AppCompatActivity {
     ListView expenditureListView;
     ArrayList<Expenditure> expenditureArrayList;
     BaseAdapter baseAdapter;
+    int userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class ShowAllExpendituresActivity extends AppCompatActivity {
         addExpenditure=(Button) findViewById(R.id.add_expenditure_button_expenditure);
         expenditureListView=(ListView) findViewById(R.id.expenditure_list_view_expenditure);
         expenditureArrayList=(ArrayList<Expenditure>) getIntent().getSerializableExtra("EXPENDITURE_LIST");
-
+        userID=getIntent().getIntExtra("USER_ID",0);
 
         baseAdapter= new BaseAdapter() {
             LayoutInflater inflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -78,6 +79,7 @@ public class ShowAllExpendituresActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ShowAllExpendituresActivity.this, AddExpenditureActivity.class);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
 
             }

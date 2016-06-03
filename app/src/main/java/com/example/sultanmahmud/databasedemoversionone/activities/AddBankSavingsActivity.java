@@ -40,7 +40,7 @@ public class AddBankSavingsActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private Calendar calendar;
     // import your list here
-    String[] bank_list = {"Sonali Bank", "Jonota Bank", "Dutch Bangla", "Uttora Bank", "Exim Bank"};
+    String[] bank_list = {"Sonali Bank", "Rupali Bank", "Standard Chartered Bank", "Agrani Bank", "IFIC Bank","Islami Bank"};
     String selected_bank, interest_rate, savings_ammount, account_number,maturity;
     int year, month, day, y, m ,userID,d;
     Button b;

@@ -595,6 +595,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+    public void addExpenditure(int userID, Expenditure expenditure){
+        SQLiteDatabase sqLiteDatabase= this.getReadableDatabase();
+        String selectQuery="select expenditure_category_id from expenditure_category where expenditure_category_name='"+expenditure.getExpenditureCategoryName()+"'";
+        Cursor cursor= sqLiteDatabase.rawQuery(selectQuery,null);
+        int expenditureCategoryID=-1;
+        if(cursor.moveToFirst()){
+            do{
+                expenditureCategoryID=Integer.parseInt(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+       cursor.close();
+//        sqLiteDatabase.close();
+        //int userID, int expenditureCategoryID, Expenditure expenditure,SQLiteDatabase sqLiteDatabase
+        Log.d("////////",""+expenditureCategoryID);
+        Log.d("////////",""+userID);
+        Log.d("////////",expenditure.toString());
+
+
+        SQLiteDatabase sqLiteDatabase1 = this.getWritableDatabase();
+        ExpenditureHelper expenditureHelper= new ExpenditureHelper();
+        expenditureHelper.addExpenditure(userID,expenditureCategoryID,expenditure,sqLiteDatabase1);
+        return;
+    }
 
 
 }
