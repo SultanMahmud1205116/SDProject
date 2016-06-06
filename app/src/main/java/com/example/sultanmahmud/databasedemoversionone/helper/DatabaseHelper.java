@@ -619,5 +619,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return;
     }
 
+    public void addIncome(int userID,Income income){
+        //int userID, int incomeCategoryID, Income income,SQLiteDatabase sqLiteDatabase
+        SQLiteDatabase sqLiteDatabase= this.getReadableDatabase();
+        String selectQuery="select income_source_category_id from income_source_category where income_source_category_name='"+income.getIncomeSource()+"'";
+        Cursor cursor= sqLiteDatabase.rawQuery(selectQuery,null);
+        int incomeSourceCategoryID=-1;
+        if(cursor.moveToFirst()){
+            do{
+                incomeSourceCategoryID=Integer.parseInt(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+        SQLiteDatabase sqLiteDatabase1=this.getWritableDatabase();
+        IncomeHelper incomeHelper= new IncomeHelper();
+        incomeHelper.addIncome(userID,incomeSourceCategoryID,income,sqLiteDatabase1);
+        return;
+    }
+
 
 }

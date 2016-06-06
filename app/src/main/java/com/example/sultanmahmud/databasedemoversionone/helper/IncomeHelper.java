@@ -1,5 +1,6 @@
 package com.example.sultanmahmud.databasedemoversionone.helper;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -12,6 +13,17 @@ import java.util.ArrayList;
  * Created by sultanmahmud on 5/26/16.
  */
 public class IncomeHelper {
+    //INSERT INTO income (income_source_category_id,income_date,user_id,
+    // income_amount, exempted_amount,net_taxable_amount)
+    private static final String INCOME_TABLE="income";
+    private static final String INCOME_SOURCE_CATEGORY_ID="income_source_category_id";
+    private static final String INCOME_DATE="income_date";
+    private static final String USER_ID="user_id";
+    private static final String INCOME_AMOUNT="income_amount";
+    private static final String EXEMPTED_AMOUNT="exempted_amount";
+    private static final String NET_TAXABLE_AMOUNT="net_taxable_amount";
+
+
 
     public ArrayList<Income> getIncome(SQLiteDatabase sqLiteDatabase, int userID){
         ArrayList<Income> incomeArrayList= new ArrayList<>();
@@ -36,5 +48,20 @@ public class IncomeHelper {
         }
         c.close();
         return incomeArrayList;
+    }
+
+    public void addIncome(int userID, int incomeCategoryID, Income income,SQLiteDatabase sqLiteDatabase){
+        //INSERT INTO income (income_source_category_id,income_date,user_id,
+        // income_amount, exempted_amount,net_taxable_amount)
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(INCOME_SOURCE_CATEGORY_ID,incomeCategoryID);
+        contentValues.put(INCOME_DATE,income.getIncomeDate());
+        contentValues.put(USER_ID,userID);
+        contentValues.put(INCOME_AMOUNT,income.getIncomeAmount());
+        contentValues.put(EXEMPTED_AMOUNT,income.getExemptedAmount());
+        contentValues.put(NET_TAXABLE_AMOUNT,income.getNetTaxableAmount());
+        sqLiteDatabase.insert(INCOME_TABLE,null,contentValues);
+
+        return;
     }
 }

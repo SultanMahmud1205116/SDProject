@@ -23,6 +23,7 @@ public class ShowAllIncomeActivity extends AppCompatActivity {
     ListView incomeListView;
     ArrayList<Income>incomeArrayList;
     BaseAdapter baseAdapter;
+    int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class ShowAllIncomeActivity extends AppCompatActivity {
         addIncome=(Button) findViewById(R.id.add_income_button_show_income);
         incomeListView=(ListView) findViewById(R.id.all_income_list_view_show_income);
         incomeArrayList=(ArrayList<Income>) getIntent().getSerializableExtra("INCOME_LIST");
+        userID=getIntent().getIntExtra("USER_ID",0);
         baseAdapter= new BaseAdapter() {
             LayoutInflater inflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 
@@ -87,6 +89,7 @@ public class ShowAllIncomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ShowAllIncomeActivity.this, AddIncomeActivity.class);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });
