@@ -30,7 +30,7 @@ public class AddSavingsActivity extends AppCompatActivity {
     // import your list here
     String[] bank_list = {"Sonali Bank", "Jonota Bank", "Dutch Bangla", "Uttora Bank", "Exim Bank"};
     String amount, description, saveDate, selected_cat;
-    int year, month, day, y, m ,d;
+    int year, month, day, y, m ,d,userID;
     Button s;
     TextView amnt, save_date, save_des;
 
@@ -40,6 +40,7 @@ public class AddSavingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_savings);
         cat_name = (Spinner)findViewById(R.id.savings_category);
         amnt = (TextView)findViewById(R.id.amount);
+        userID=getIntent().getIntExtra("USER_ID",0);
         save_date = (TextView)findViewById(R.id.date);
         save_des = (TextView)findViewById(R.id.des);
         s = (Button)findViewById(R.id.save);

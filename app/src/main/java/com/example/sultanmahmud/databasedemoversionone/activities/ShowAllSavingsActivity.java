@@ -23,6 +23,7 @@ public class ShowAllSavingsActivity extends AppCompatActivity {
     ListView savingsListView;
     ArrayList<Savings> savingsArrayList;
     BaseAdapter baseAdapter;
+    int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class ShowAllSavingsActivity extends AppCompatActivity {
         addSavingsButton= (Button) findViewById(R.id.add_savings_button_savings);
         savingsListView=(ListView)findViewById(R.id.savings_list_view_savings);
         savingsArrayList=(ArrayList<Savings>)getIntent().getSerializableExtra("SAVINGS_LIST");
+        userID=getIntent().getIntExtra("USER_ID",0);
+
         Log.d("%%%%%", ""+savingsArrayList.size());
 
         baseAdapter=new BaseAdapter() {
@@ -77,6 +80,7 @@ public class ShowAllSavingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ShowAllSavingsActivity.this, AddSavingsActivity.class);
+                intent.putExtra("USER_ID",userID);
                 startActivity(intent);
             }
         });

@@ -34,7 +34,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
     Button expendituresButton;
     Button incomeButton;
     Button loansGivenButton;
-    Button savingsButton;
+    //Button savingsButton;
 
     int userID=0;
     DatabaseHelper dbh;
@@ -64,7 +64,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
         expendituresButton=(Button)findViewById(R.id.expenditure_button);
         incomeButton=(Button)findViewById(R.id.income_button);
         loansGivenButton=(Button)findViewById(R.id.loan_given_button);
-        savingsButton=(Button)findViewById(R.id.savings_button);
+        //savingsButton=(Button)findViewById(R.id.savings_button);
         dbh=DatabaseHelper.getInstance(getApplicationContext());
 
 
@@ -174,6 +174,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+        /*
         savingsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,6 +186,7 @@ public class SuccessfulLogInActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+        */
 
 
 
