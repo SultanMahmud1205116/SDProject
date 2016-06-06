@@ -105,21 +105,7 @@ public class MainActivity extends AppCompatActivity implements LoginView {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent(MainActivity.this, UnsuccessfulLogInActivity.class);
-               // startActivity(intent);
-                ArrayList<Asset> assetArrayList;
-
-                assetArrayList= dbh.getAllAssets(1);
-
-
-//                for(Asset asset: assetArrayList){
-//                    Log.d("################# ",asset.toString());
-//                }
-
-
-                Intent intent= new Intent(MainActivity.this, ShowAllAssetsActivity.class);
-                int sizeOfArrayList=assetArrayList.size();
-                intent.putExtra("SIZE",sizeOfArrayList);
+                Intent intent= new Intent(MainActivity.this, UnsuccessfulLogInActivity.class);
                 startActivity(intent);
             }
         });

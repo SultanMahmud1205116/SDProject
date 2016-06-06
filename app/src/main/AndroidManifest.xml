@@ -32,7 +32,7 @@
         <activity android:name=".activities.ShowAllExpendituresActivity" />
         <activity android:name=".activities.AddExpenditureActivity" />
         <activity android:name=".activities.ShowAllSavingsActivity" />
-        <activity android:name=".activities.AddSavingsActivity"></activity>
+        <activity android:name=".activities.AddSavingsActivity" />
     </application>
 
 </manifest>
