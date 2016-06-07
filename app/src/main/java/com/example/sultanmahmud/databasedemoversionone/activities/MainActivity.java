@@ -105,7 +105,28 @@ public class MainActivity extends AppCompatActivity implements LoginView {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.onLoginClicked();
                 Intent intent= new Intent(MainActivity.this, UnsuccessfulLogInActivity.class);
+                startActivity(intent);
+            }
+        });
+        logInAsAdminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onLoginClicked();
+                String adminName=logInAsAdminNameEditText.getText().toString();
+                String adminPassword=logInAsAdminPasswordEditText.getText().toString();
+
+
+                int adminID=dbh.getAdminID( adminName,adminPassword);
+                Intent intent;
+                if(adminID ==-1){
+                    intent = new Intent(MainActivity.this, UnsuccessfulLogInActivity.class);
+                }
+                else{
+                    intent = new Intent(MainActivity.this, AdminPageActivity.class);
+                    intent.putExtra("ADMIN_ID",adminID);
+                }
                 startActivity(intent);
             }
         });

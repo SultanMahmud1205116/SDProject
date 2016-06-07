@@ -33,6 +33,9 @@
         <activity android:name=".activities.AddExpenditureActivity" />
         <activity android:name=".activities.ShowAllSavingsActivity" />
         <activity android:name=".activities.AddSavingsActivity" />
+        <activity android:name=".activities.AdminPageActivity" />
+        <activity android:name=".activities.GenerateReportActivity" />
+        <activity android:name=".activities.EditTaxCalculationParametersActivity"></activity>
     </application>
 
 </manifest>

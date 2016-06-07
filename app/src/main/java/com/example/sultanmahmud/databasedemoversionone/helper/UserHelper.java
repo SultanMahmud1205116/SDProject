@@ -88,8 +88,8 @@ public class UserHelper {
 
         int returnValue=-1;
         String selectQuery="select * from user where email = '"+userMail+"' and password = '"+password+"'";
-        Log.d("USer mail: ",userMail);
-        Log.d("Password: ",password);
+        //Log.d("USer mail: ",userMail);
+        //Log.d("Password: ",password);
         Cursor c = db.rawQuery(selectQuery,null);
         //Log.d("*** this is the count",""+c.getCount());
         if(c.moveToFirst()){

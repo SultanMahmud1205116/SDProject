@@ -637,4 +637,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public int getAdminID(String adminName, String adminPassword) {
+        int returnValue;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+       // AdminHelper userHelper = new UserHelper();
+        AdminHelper adminHelper= new AdminHelper();
+
+//        Log.d("USer mail: ",userMail);
+//        Log.d("Password: ",password);
+        returnValue = adminHelper.getAdminID(adminName, adminPassword, sqLiteDatabase);
+
+
+        return returnValue;
+    }
+    public TaxCalculationParameter getTaxCalculationParameter(){
+        SQLiteDatabase sqLiteDatabase =this.getReadableDatabase();
+        AdminHelper adminHelper= new AdminHelper();
+        TaxCalculationParameter taxCalculationParameter=adminHelper.getTaxCalculationParameter(sqLiteDatabase);
+        return taxCalculationParameter;
+    }
+
+    public AdminReport getAdminReport(){
+        SQLiteDatabase sqLiteDatabase= this.getReadableDatabase();
+        AdminReportHelper adminReportHelper = new AdminReportHelper();
+        AdminReport adminReport= adminReportHelper.getAdminReport(sqLiteDatabase);
+        return adminReport;
+    }
+
 }
