@@ -62,7 +62,7 @@ public class AdminReportHelper {
         cursor3.close();
         adminReport=new AdminReport( avgTaxableIncomeOfAllUsers,  cityOfUserWithMaxIncome,  totalForeignIncomeOfAllUsers,  totalZakatAmountOfAllUsers);
 
-        Log.d("$$$$$$$$",adminReport.toString());
+        //Log.d("$$$$$$$$",adminReport.toString());
         return adminReport;
     }
 }

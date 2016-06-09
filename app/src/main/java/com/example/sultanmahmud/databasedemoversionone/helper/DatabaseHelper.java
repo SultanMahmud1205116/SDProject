@@ -664,4 +664,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return adminReport;
     }
 
+    public void removeAsset(Asset assetToDelete,int userID) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        AssetHelper.removeAsset(assetToDelete,sqLiteDatabase,userID);
+        return;
+    }
 }

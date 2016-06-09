@@ -20,6 +20,7 @@ public class AssetHelper {
     private static final String USER_ID="user_id";
     private static final String ASSET_VALUE="asset_value";
     private static final String ASSET_TABLE="asset";
+
     private String[] assetCategoryList={
             "business_capital",
             "director_shareholdings_in_limited_compnanies",
@@ -83,7 +84,7 @@ public class AssetHelper {
                 */
 
                 String assetName=c.getString(2);
-                Log.d("&&&&&&&&&&&&&", ""+assetName);
+                //Log.d("&&&&&&&&&&&&&", ""+assetName);
                 String assetCategoryName="hello";
                 int assetValue=Integer.parseInt(c.getString(4));
                 Asset asset= new Asset(assetName,assetCategoryName,assetValue);
@@ -119,6 +120,11 @@ public class AssetHelper {
     }
 
 
-
-
+    public static void removeAsset(Asset assetToDelete, SQLiteDatabase sqLiteDatabase, int userID) {
+        //int x=sqLiteDatabase.delete("asset","asset_category_id = '"+assetToDelete.getAssetCategory()+"' and assetname = '"+assetToDelete.getAssetName()+"' and asset_value = '"+assetToDelete.getAssetvalue()+"' and user_id='"+userID+"'",null);
+        int x=sqLiteDatabase.delete("asset","asset_category_id = ? and assetname = ? and asset_value = ? and user_id = ?",new String[]{assetToDelete.getAssetCategory(),assetToDelete.getAssetName(),""+assetToDelete.getAssetvalue(),""+userID});
+        //Log.d("#########","asset_category_id = '"+assetToDelete.getAssetCategory()+"' and assetname = '"+assetToDelete.getAssetName()+"' and asset_value = '"+assetToDelete.getAssetvalue()+"' and user_id='"+userID+"'");
+        Log.d("%%%%%%%%%",""+x);
+        //asset.get
+    }
 }
